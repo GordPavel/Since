@@ -47,15 +47,15 @@ def fi(xi, yi):
     return ([[math.atan2(y[i][j], x[i][j]) for i in np.arange(0, len(xi))] for j in np.arange(0, len(yi))])
 
 
-def f1(x, y):
-    return np.sin(alpha * np.power(k * r(x, y), gamma) * m * fi(xi, yi))
+#
+# def f1(x, y):
+#     return np.sin(alpha * np.power(k * r(x, y), gamma) * m * fi(xi, yi))
 
 
-z = (f1(x, y))
+z = np.sin(alpha * np.power(k * r(x, y), gamma) * m * fi(xi, yi))
+
+# z = (f1(x, y))
 # print(z)
-
-# we = ([[f1(x, y) for j in x] for i in y])
-# print(we)
 
 
 fig = plt.figure()
