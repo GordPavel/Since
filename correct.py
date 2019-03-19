@@ -5,16 +5,29 @@ from scipy.fftpack import fft, fftfreq, fftshift
 from mpl_toolkits.mplot3d import Axes3D
 from colorsys import hls_to_rgb
 
-x = np.linspace(-1, 1)
-y = np.linspace(-1, 1)
 
-# r = np.sqrt(np.power(x, 2) + np.power(y, 2))
-fi = math.atan2(y, x)
 wl = 0.000532
 k = (2 * np.pi) / wl
 alpha = 1e-3
 gamma = 1
 m = 1
+
+
+x = np.linspace(-1, 1, 100)
+y = np.linspace(-1, 1, 100)
+x, y = np.meshgrid(x, y)
+
+# r = np.sqrt(np.power(x, 2) + np.power(y, 2))
+
+
+def fi():
+    for y in range(-1, 2):
+        for x in range(-1, 2):
+            return math.atan2(y, x)
+
+
+# fi = math.atan2(y, x)
+
 
 def colorize(z):
     n, l = z.shape
@@ -33,30 +46,31 @@ def colorize(z):
     # return np.sin(alpha * np.float_power(k * r, gamma) * m * fi)
 
 def f1(x, y):
-    return np.sin(alpha * np.float_power(k * np.sqrt((x ** 2 + y ** 2)), gamma) * m * fi)
+    return np.sin(alpha * np.float_power(k * np.sqrt((x ** 2 + y ** 2)), gamma) * m)
 
 
 
-xx, yy = np.meshgrid(x, y)
+
 z = f1(x, y)
 
-fig = plt.figure()
-ax = fig.gca(projection='3d')
 
-ax.plot_surface(xx, yy, z)
-ax.set_zticks([])
+# fig = plt.figure()
+# ax = fig.gca(projection='3d')
+
+# ax.plot_surface(x, y, z)
+# ax.set_zticks([])
 # # убрать коммент. если надо убрать значения оси z
-# ax.set_xticks([-2000, -1000, -500, 0, 500, 1000, 2000])
-# ax.set_yticks([-2000, -1000, -500, 0, 500, 1000, 2000])
+# ax.set_xticks([])
+# ax.set_yticks([])
 #
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
-plt.show()
-
-# plt.imshow(z, origin='lower', interpolation='None')
+# ax.set_xlabel('x')
+# ax.set_ylabel('y')
+# ax.set_zlabel('z')
 # plt.show()
 #
+plt.imshow(z, origin='lower', interpolation='None')
+plt.show()
+
 # plt.show()
 # o = np.abs(z)
 # plt.imshow(o, origin='lower', interpolation='None')
@@ -69,6 +83,6 @@ plt.show()
 #
 # img = colorize(f1(x, y))
 # plt.imshow(img)
-
+#
 # plt.show()
-
+#
